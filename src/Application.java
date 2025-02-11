@@ -3,36 +3,28 @@ package src;
 import java.util.Scanner;
 
 public class Application {
+    private static TaskManager tm;
+
     public static void main(String[] args){
         boolean Open = true;
         String Input = "";
         Scanner scanner = new Scanner(System.in);
-        TaskManager tm = TaskManager.getInstance();
+        tm = TaskManager.getInstance();
 
         while (Open){
             System.out.println("Choose your action");
             System.out.println("'add' - adds new task");
-            System.out.println("'edit' - edit a task");
-            System.out.println("'remove' - remove a task");
-            System.out.println("'view' - view a task");
+            System.out.println("'view' - view tasks");
             System.out.println("'exit' - close application");
             System.out.println("Enter your action:");
             String action = scanner.nextLine();
             switch (action){
                 case "add":
-                    System.out.println("~~executed add...");
-                    break;
-
-                case "edit":
-                    System.out.println("~~executed edit...");
-                    break;
-
-                case "remove":
-                    System.out.println("~~executed remove...");
+                    newTask(scanner);
                     break;
 
                 case "view":
-                    System.out.println("~~executed view...");
+                    tm.printTasks();
                     break;
 
                 case "exit":
@@ -43,5 +35,14 @@ public class Application {
             }
 
         }
+    }
+
+    public static void newTask(Scanner scanner){
+        Task t = new Task();
+        System.out.println("Enter Name:");
+        t.setName(scanner.nextLine());
+        System.out.println("Enter Description:");
+        t.setDescription(scanner.nextLine());
+        tm.add(t);
     }
 }

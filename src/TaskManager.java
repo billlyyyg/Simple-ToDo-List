@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class TaskManager {
     private static TaskManager instance;
 
-    private ArrayList<Task> tasks;
+    private PriorityQueue tasks;
 
     private TaskManager(){
-        tasks = new ArrayList<Task>();
+        tasks = new PriorityQueue();
     }
 
     public static TaskManager getInstance(){
@@ -18,7 +18,18 @@ public class TaskManager {
         return instance;
     }
 
-    public void add(){
-
+    public void add(Task task){
+        tasks.add(task);
     }
+    public Task poll(){
+        return tasks.poll();
+    }
+
+    public void printTasks(){
+        for (int i = 0; i < tasks.size(); i++){
+            Task t = tasks.get(i);
+            System.out.println(t.getName() +  ": " + t.getDescription());
+        }
+    }
+
 }
